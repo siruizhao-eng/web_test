@@ -4,23 +4,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>X-Men Professor | portfolio</title>
+    <title>Elden Ring | Tarnished Portfolio</title>
+
     <link rel="icon" type="image" href="./assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Cinzel', serif;
+            background:
+                linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.9)),
+                url("assets/thumb-1920-992033.jpg") center center;
+            background-size: cover;
+            color: #d4af37;
+        }
+
+        #loading {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background: #050300;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #spinner {
+            width: 55px;
+            height: 55px;
+            border: 10px solid rgba(212,175,55,0.25);
+            border-bottom: 10px solid #d4af37;
+            border-radius: 50%;
+            animation: rotate 0.8s infinite linear;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+        }
+
+        #box {
+            width: 100vw;
+            height: 100vh;
+            z-index: 9;
+            position: fixed;
+            top: 0;
+        }
+
+        #box div {
+            width: 16.66vw;
+            height: 100%;
+            display: inline-block;
+        }
+
+        .box1, .box2 {
+            background: #120b02;
+        }
+
+        .box2 {
+            margin-left: -5px;
+        }
+
+        #middle {
+            width: 100vw;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            text-align: center;
+            z-index: 1;
+            padding-bottom: 10vh;
+        }
+
+        #middle h1 {
+            font-size: 78px;
+            color: #f5c542;
+            letter-spacing: 8px;
+            text-shadow: 0 0 18px rgba(245,197,66,0.7);
+            margin-bottom: 10px;
+        }
+
+        #middle h2 {
+            color: #d8c58a;
+            font-size: 22px;
+            letter-spacing: 3px;
+        }
+
+        #menu {
+            width: 100%;
+            text-align: center;
+            margin: 6vh 0;
+            display: none;
+        }
+
+        #menu a {
+            margin: 0 5%;
+            font-size: 18px;
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        #about, #work, #contact, #projects {
+            width: 10vw;
+            height: 10vw;
+            text-align: center;
+            font-size: 22px;
+            background: transparent;
+            color: #d4af37;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 4;
+            transition: 0.4s ease-in-out;
+            letter-spacing: 2px;
+        }
+
+        #about {
+            transform: rotate(-90deg);
+            left: 0;
+            bottom: 40vh;
+        }
+
+        #work {
+            transform: rotate(90deg);
+            right: 0;
+            bottom: 40vh;
+        }
+
+        #contact {
+            bottom: 0;
+            left: 45vw;
+            border-radius: 100px 100px 0 0;
+        }
+
+        #projects {
+            top: 0;
+            right: 45vw;
+            border-radius: 0 0 100px 100px;
+        }
+
+        #about:hover, #work:hover, #contact:hover, #projects:hover {
+            background: rgba(0,0,0,0.8);
+            color: #fff2b0;
+            cursor: pointer;
+            text-shadow: 0 0 12px gold;
+        }
+
+        #middle table {
+            width: 30%;
+            margin: 6vh auto;
+        }
+
+        #middle table tr td {
+            text-align: center;
+        }
+
+        .social {
+            color: #d4af37;
+            font-size: 26px;
+            margin: 0 15px;
+            transition: 0.4s ease-in-out;
+        }
+
+        .social:hover {
+            color: #fff2b0;
+            text-shadow: 0 0 14px gold;
+        }
+
+        .container {
+            width: 90vw;
+            height: 90vh;
+            padding: 5vh 5vw;
+            background: rgba(3, 2, 0, 0.92);
+            color: #d8c58a;
+            z-index: 9;
+            position: fixed;
+            max-height: 100vh;
+            overflow-y: auto;
+            display: none;
+            border: 1px solid rgba(212,175,55,0.35);
+            box-shadow: inset 0 0 30px rgba(212,175,55,0.08);
+        }
+
+        .container div {
+            font-size: 25px;
+            margin: 20px 0;
+            transition: 0.4s ease-in-out;
+        }
+
+        .container div:hover {
+            cursor: pointer;
+            color: #f5c542;
+        }
+
+        .container h1 {
+            font-size: 60px;
+            color: #f5c542;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(245,197,66,0.5);
+        }
+
+        .container h2 {
+            color: #fff2b0;
+            font-size: 28px;
+        }
+
+        .container p {
+            font-size: 21px;
+            line-height: 1.7;
+        }
+
+        .container section {
+            margin: 7vh 0;
+        }
+
+        #used div {
+            font-size: 14px !important;
+            display: inline-block;
+            padding: 9px 14px;
+            border: 1px solid #d4af37;
+            margin: 8px 10px;
+            border-radius: 50px;
+            color: #d8c58a;
+        }
+
+        .project_card {
+            border: 1px solid rgba(212,175,55,0.3);
+            padding: 20px;
+            margin: 25px 0;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .project_info h3 {
+            color: #f5c542;
+            font-size: 25px;
+        }
+
+        .btn_one {
+            font-size: 17px;
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            background: transparent;
+            border: 1px solid #d4af37;
+            padding: 10px 35px;
+            border-radius: 80px;
+            font-weight: bold;
+            margin: 2vh 10px;
+            transition: 0.4s ease-in-out;
+        }
+
+        .btn_one:hover {
+            cursor: pointer;
+            color: #050300;
+            background: #d4af37;
+            box-shadow: 0 0 15px rgba(212,175,55,0.7);
+        }
+
+        .container form input,
+        .container form textarea {
+            width: 46%;
+            margin: 20px 1%;
+            background: transparent;
+            border: 0;
+            border-bottom: 2px solid rgba(212,175,55,0.5);
+            padding: 8px 10px;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            color: #fff2b0;
+        }
+
+        .container form textarea {
+            width: 96%;
+            resize: none;
+        }
+
+        .container form input:focus,
+        .container form textarea:focus {
+            outline: none;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        ::placeholder {
+            color: #b8a56c;
+        }
+
+        #footer {
+            color: #d4af37;
+            width: 92vw;
+            padding: 10vh 4vw 5vh 4vw;
+            text-align: right;
+            position: fixed;
+            z-index: 1;
+            bottom: 0;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        #footer a {
+            color: #f5c542;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050300;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+        }
+
+        @media (max-width: 800px) {
+            #projects, #about, #contact, #work {
+                display: none;
+            }
+
+            #menu {
+                display: inline-block;
+            }
+
+            #middle {
+                width: 90vw;
+                padding: 0 5vw;
+            }
+
+            #middle h1 {
+                font-size: 48px;
+            }
+
+            #middle table {
+                width: 80%;
+            }
+
+            .container form input,
+            .container form textarea {
+                width: 90%;
+            }
+
+            #footer {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
+
     <div id="loading">
         <div id="spinner"></div>
     </div>
+
     <div id="particles-js"></div>
+
     <div id="box">
         <div class="box1 onlywide animated bounceOutLeft" style="animation-delay: 1700ms;"></div>
         <div class="box2 onlywide animated bounceOutLeft" style="animation-delay: 1800ms;"></div>
@@ -29,117 +386,212 @@
         <div class="box2 onlywide animated bounceOutRight" style="animation-delay: 1800ms;"></div>
         <div class="box2 onlywide animated bounceOutRight" style="animation-delay: 1700ms;"></div>
     </div>
-    <a id="about" onclick="showabout()" class="animated fadeIn" style="animation-delay: 1000ms;">ABOUT</a>
-    <a id="work" onclick="showwork()" class="animated fadeIn" style="animation-delay: 1000ms;">PROFESSION</a>
-    <a id="contact" onclick="showcontact()" class="animated fadeIn" style="animation-delay: 1000ms;">CONTACT</a>
-    <a id="projects" onclick="showprojects()" class="animated fadeIn" style="animation-delay: 1000ms;">PROJECTS</a>
+
+    <a id="about" onclick="showabout()" class="animated fadeIn" style="animation-delay: 1000ms;">LORE</a>
+    <a id="work" onclick="showwork()" class="animated fadeIn" style="animation-delay: 1000ms;">BUILD</a>
+    <a id="contact" onclick="showcontact()" class="animated fadeIn" style="animation-delay: 1000ms;">SUMMON</a>
+    <a id="projects" onclick="showprojects()" class="animated fadeIn" style="animation-delay: 1000ms;">QUESTS</a>
+
     <div id="middle" class="animated slideInDown" style="animation-delay: 2000ms;">
-        <h1>X-Men Professor</h1>
-        <h2>Developer | Scientist | Professor</h2>
+        <h1>TARNISHED</h1>
+        <h2>Bearer of the Elden Ring | Warrior of the Lands Between</h2>
+
         <div id="menu">
-            <a onclick="showabout()">ABOUT</a>
-            <a onclick="showwork()">PROFESSION</a>
-            <a onclick="showcontact()">CONTACT</a>
-            <a onclick="showprojects()">PROJECTS</a>
+            <a onclick="showabout()">LORE</a>
+            <a onclick="showwork()">BUILD</a>
+            <a onclick="showprojects()">QUESTS</a>
+            <a onclick="showcontact()">SUMMON</a>
         </div>
+
         <table>
             <tr>
-                <td class="animated zoomIn" style="animation-delay:2.2s;"><a class="social"
-                        href="https://www.science.org/"><i class="fas fa-atom"></i></a></td> 
+                <td class="animated zoomIn" style="animation-delay:2.2s;">
+                    <a class="social" href="https://eldenring.wiki.fextralife.com/Elden+Ring+Wiki" target="_blank">
+                        <i class="fas fa-chess-king"></i>
+                    </a>
+                </td>
+
+                <td class="animated zoomIn" style="animation-delay:2.4s;">
+                    <a class="social" href="https://en.bandainamcoent.eu/elden-ring/elden-ring" target="_blank">
+                        <i class="fas fa-fire"></i>
+                    </a>
+                </td>
+
+                <td class="animated zoomIn" style="animation-delay:2.6s;">
+                    <a class="social" href="https://www.fromsoftware.jp/ww/" target="_blank">
+                        <i class="fas fa-shield-alt"></i>
+                    </a>
+                </td>
             </tr>
         </table>
     </div>
+
     <div id="projects_container" class="container">
-        <div onclick="closeprojects()"><i class="fas fa-angle-right"></i></div>
-        <h1>Projects</h1>
+        <div onclick="closeprojects()">
+            <i class="fas fa-angle-right"></i>
+        </div>
+
+        <h1>Quests</h1>
+
         <section>
-            <h2>Work is my Hobby!</h2>
+            <h2>Journey Through the Lands Between</h2>
+
             <p>
-                Here are some of the projects I've worked on recently. Feel free to explore.
+                These are the legendary enemies, impossible trials, and personal victories that shaped my journey as a Tarnished. 
+                Every quest is more than a mission. It is a test of patience, timing, courage, and the will to continue even after defeat.
             </p>
-            <ul>
-                <div class="project_card">
-                    <div class="project_info">
-                        <h3>Portfolio</h3>
-                        <p>The Open-Source code for the Personal Portfolio this website is coming from! A minimal and
-                            ambient portfolio template for Developers! ⚡</p>
-                        <button class="btn_one"><a
-                                href="https://www.roboticenergyllc.com/"
-                                style="color: inherit; text-decoration: none"> View Project </a></button>
-                    </div>
+
+            <div class="project_card">
+                <div class="project_info">
+                    <h3>Stormveil Castle</h3>
+                    <p>
+                        The first major fortress on the path to greatness. Facing Margit and Godrick taught the Tarnished that power alone is not enough.
+                        Victory comes from learning patterns, staying calm, and striking at the right moment.
+                    </p>
+                    <button class="btn_one">View Quest</button>
                 </div>
-                
-            </ul>
-        </section>
-    </div>
-    <div id="work_container" class="container">
-        <div onclick="closework()"><i class="fas fa-angle-right"></i></div>
-        <h1>Profession</h1>
-        <section>
-            <h2>The job is not my job</h2>
-            <p>
-                Welcome! I'm X_men professor, a passionate professional specializing in fundamental science discovery. 
-            </p>
-            <div id="used">
-                <div><i class="fas fa-circle"></i>&nbsp;Web Designing</div>
-                <div><i class="fas fa-circle"></i>&nbsp;Content Writing</div>
-                <div><i class="fas fa-circle"></i>&nbsp;Graphic Designing</div>
             </div>
-            <button class="btn_one"><a href="./assets/AP_CSP_Test_Breakdown.pdf" target="_blank"
-                    style="color: inherit; text-decoration: none">View
-                    Resume</a></button>
+
+            <div class="project_card">
+                <div class="project_info">
+                    <h3>Starscourge Radahn</h3>
+                    <p>
+                        A battle beneath a blood-red sky against the conqueror of the stars. This fight represents chaos, scale, and courage.
+                        The Tarnished rides into war with allies, dodging arrows, magic, and the force of a broken legend.
+                    </p>
+                    <button class="btn_one">View Quest</button>
+                </div>
+            </div>
+
+            <div class="project_card">
+                <div class="project_info">
+                    <h3>Malenia, Blade of Miquella</h3>
+                    <p>
+                        The ultimate test of discipline. Malenia is not simply defeated through strength. She demands precision, patience,
+                        and the ability to recover from failure again and again.
+                    </p>
+                    <button class="btn_one">View Quest</button>
+                </div>
+            </div>
+
+            <div class="project_card">
+                <div class="project_info">
+                    <h3>The Erdtree</h3>
+                    <p>
+                        The final destination of the Tarnished. After countless battles, lost runes, discovered secrets, and broken enemies,
+                        the warrior stands before destiny and reaches for the title of Elden Lord.
+                    </p>
+                    <button class="btn_one">View Quest</button>
+                </div>
+            </div>
         </section>
     </div>
+
+    <div id="work_container" class="container">
+        <div onclick="closework()">
+            <i class="fas fa-angle-right"></i>
+        </div>
+
+        <h1>Build</h1>
+
+        <section>
+            <h2>Strength of the Tarnished</h2>
+
+            <p>
+                This build focuses on survival, close combat, and smart decision-making. The Tarnished does not win every battle through speed or luck.
+                Instead, each victory comes from preparation: upgrading weapons, choosing the right armor, managing flasks, reading enemy attacks,
+                and knowing when to attack or retreat.
+            </p>
+
+            <div id="used">
+                <div><i class="fas fa-circle"></i>&nbsp;Strength Build</div>
+                <div><i class="fas fa-circle"></i>&nbsp;Dexterity Combat</div>
+                <div><i class="fas fa-circle"></i>&nbsp;Boss Strategy</div>
+                <div><i class="fas fa-circle"></i>&nbsp;Rune Farming</div>
+                <div><i class="fas fa-circle"></i>&nbsp;Weapon Upgrades</div>
+                <div><i class="fas fa-circle"></i>&nbsp;Exploration</div>
+            </div>
+
+            <p>
+                The main goal of this build is balance. A strong weapon can deal damage, but timing and patience decide the fight.
+                The Tarnished learns from every death and turns every failure into progress.
+            </p>
+
+            <button class="btn_one">
+                View Build
+            </button>
+        </section>
+    </div>
+
     <div id="about_container" class="container">
-        <div onclick="closeabout()"><i class="fas fa-angle-left"></i></div>
-        <h1>About</h1>
+        <div onclick="closeabout()">
+            <i class="fas fa-angle-left"></i>
+        </div>
+
+        <h1>Lore</h1>
+
         <section>
-            <h2>Are you looking for me?</h2>
+            <h2>Rise, Tarnished</h2>
+
             <p>
-                Ladies and gentlemen, please put your safety goggles on and firewall up—because entering the stage is the only human being who can debug Python code while balancing a chemical equation! Meet Professor G., a rare hybrid of a computer scientist and chemist—basically what happens when a compiler and a Bunsen burner fall in love.
-
-                They've got more RAM than your average brain and more volatile reactions than sodium in water. Their idea of a wild night? Refactoring code while simulating exothermic reactions. They speak fluent Java, C++, and periodic table. Legend says they once accidentally created a sentient AI by mixing caffeine with Red Bull and kernel-level access.
-
-                So whether it's electrons or electrons in circuits, this genius handles both with atomic precision. Be warned: they're 100% organic, 0% memory leak, and currently running on pure caffeine and curiosity!
+                In the shattered Lands Between, the Tarnished walks beneath the fading light of grace. Banished long ago and forgotten by the Golden Order,
+                the warrior rises once more to seek the fragments of the Elden Ring and claim the throne of Elden Lord.
             </p>
 
             <p>
-                Feel free to explore my portfolio on my website, where you can witness the diverse range of projects
-                I've had the privilege to work on. 
+                Across ruined castles, poisoned swamps, underground cities, and battlefields soaked in blood, the Tarnished faces enemies that seem impossible.
+                Demigods stand in the way. Ancient monsters guard forgotten places. Every step forward requires courage, patience, and the willingness to fall and rise again.
             </p>
 
+            <p>
+                This website is designed as an Elden Ring themed portfolio. Instead of a normal personal homepage, it presents the journey like a dark fantasy legend.
+                The sections are changed into Lore, Build, Quests, and Summon to match the feeling of the game world.
+            </p>
         </section>
+
         <section>
-            <h2>skills</h2>
+            <h2>Skills</h2>
+
             <p>
-                html, css, javascript, markdown, python, mysql, ....
+                sword combat, dodging, parrying, rune farming, boss strategy, exploration, weapon upgrading, magic builds, survival, patience, and persistence
             </p>
         </section>
     </div>
+
     <div id="contact_container" class="container">
-        <div onclick="closecontact()"><i class="fas fa-angle-down"></i></div>
-        <h1>Contact</h1>
+        <div onclick="closecontact()">
+            <i class="fas fa-angle-down"></i>
+        </div>
+
+        <h1>Summon</h1>
+
         <section>
-            <h2>No way to reach out to me</h2>
+            <h2>Leave a Message, Tarnished</h2>
+
             <p>
+                Need help with a boss, a build, or a quest? Send a message through the summoning sign below.
+            </p>
+
             <form action="https://formcarry.com/s/JKNu0aGkeQ" method="POST" class="formcarry-form">
                 <input name="name" type="text" placeholder="name" required />
-                <input name="email" type="email" placeholder="email" required /><br>
-                <textarea name="message" placeholder="your message" required rows="5"></textarea><br>
+                <input name="email" type="email" placeholder="email" required />
+                <br>
+                <textarea name="message" placeholder="your message" required rows="5"></textarea>
+                <br>
                 <button class="btn_one">send</button>
             </form>
-            </p>
-
-            <td class="animated zoomIn" style="animation-delay:2.2s;"><a class="social"
-                href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></td> 
         </section>
     </div>
+
     <div id="footer">
-        Unbelievable Particles Floating Around You<br> <a href="https://powerlock.github.io">ThePowerLock</a>
+        Guided by Grace<br>
+        <a href="https://eldenring.wiki.fextralife.com/Elden+Ring+Wiki" target="_blank">Elden Ring Wiki Reference</a>
     </div>
+
     <script src="index.js" type="text/javascript"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>
+
 </body>
 
 </html>
