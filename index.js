@@ -1,48 +1,51 @@
-$(document).ready(function () {
-    $("#loading").fadeOut(1200);
-});
+window.onload = function () {
+    var loading = document.getElementById("loading");
+    if (loading) {
+        loading.style.display = "none";
+    }
+};
 
 function closeAll() {
-    $("#about_container").fadeOut(300);
-    $("#work_container").fadeOut(300);
-    $("#contact_container").fadeOut(300);
-    $("#projects_container").fadeOut(300);
+    document.getElementById("about_container").style.display = "none";
+    document.getElementById("work_container").style.display = "none";
+    document.getElementById("contact_container").style.display = "none";
+    document.getElementById("projects_container").style.display = "none";
 }
 
 function showabout() {
     closeAll();
-    $("#about_container").fadeIn(300);
+    document.getElementById("about_container").style.display = "block";
 }
 
 function showwork() {
     closeAll();
-    $("#work_container").fadeIn(300);
+    document.getElementById("work_container").style.display = "block";
 }
 
 function showcontact() {
     closeAll();
-    $("#contact_container").fadeIn(300);
+    document.getElementById("contact_container").style.display = "block";
 }
 
 function showprojects() {
     closeAll();
-    $("#projects_container").fadeIn(300);
+    document.getElementById("projects_container").style.display = "block";
 }
 
 function closeabout() {
-    $("#about_container").fadeOut(300);
+    document.getElementById("about_container").style.display = "none";
 }
 
 function closework() {
-    $("#work_container").fadeOut(300);
+    document.getElementById("work_container").style.display = "none";
 }
 
 function closecontact() {
-    $("#contact_container").fadeOut(300);
+    document.getElementById("contact_container").style.display = "none";
 }
 
 function closeprojects() {
-    $("#projects_container").fadeOut(300);
+    document.getElementById("projects_container").style.display = "none";
 }
 
 document.addEventListener("keydown", function (event) {
