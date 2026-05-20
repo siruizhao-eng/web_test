@@ -10,9 +10,10 @@ font-family:'Cinzel',serif;
 body{
 
 background:
+
 linear-gradient(
-rgba(0,0,0,.25),
-rgba(0,0,0,.75)
+rgba(0,0,0,.30),
+rgba(0,0,0,.80)
 ),
 
 url("assets/wallpapersden.com_elden-ring-shadow-of-the-erdtree-landscape_3840x2160.jpg");
@@ -25,11 +26,13 @@ background-repeat:no-repeat;
 
 background-attachment:fixed;
 
-overflow-x:hidden;
+overflow:hidden;
 
 color:#d4af37;
 
 }
+
+/* loading */
 
 #loading{
 
@@ -39,9 +42,7 @@ width:100vw;
 
 height:100vh;
 
-background:#050300;
-
-z-index:99999;
+background:black;
 
 display:flex;
 
@@ -49,18 +50,22 @@ justify-content:center;
 
 align-items:center;
 
+z-index:99999;
+
 }
 
 #spinner{
 
-width:55px;
+width:60px;
 
-height:55px;
+height:60px;
 
 border:
-8px solid rgba(212,175,55,.25);
+
+8px solid rgba(255,215,0,.25);
 
 border-bottom:
+
 8px solid gold;
 
 border-radius:50%;
@@ -71,92 +76,142 @@ animation:spin .8s infinite linear;
 
 @keyframes spin{
 
-from{
-transform:rotate(0);
+0%{
+
+transform:rotate(0deg);
+
 }
 
-to{
+100%{
+
 transform:rotate(360deg);
+
 }
 
 }
+
+/* 背景 */
 
 #particles-js{
 
 position:fixed;
 
-width:100%;
-
-height:100%;
-
 top:0;
 
 left:0;
 
+width:100%;
+
+height:100%;
+
 z-index:-1;
+
+pointer-events:none;
 
 }
 
+#box{
+
+pointer-events:none;
+
+}
+
+/* 隐藏四周按钮 */
+
+#about,
+#work,
+#contact,
+#projects{
+
+display:none !important;
+
+}
+
+/* 主页面 */
+
 #middle{
 
-height:100vh;
+position:absolute;
 
-display:flex;
+top:50%;
 
-flex-direction:column;
+left:50%;
 
-justify-content:center;
+transform:
 
-align-items:center;
+translate(
+-50%,
+-50%
+);
+
+width:100%;
 
 text-align:center;
 
-position:relative;
+z-index:999;
 
-z-index:10;
+pointer-events:auto;
 
 }
 
 #middle h1{
 
-font-size:90px;
+font-size:100px;
 
 font-weight:900;
 
 color:#f5c542;
 
 text-shadow:
-0 0 20px gold;
+
+0 0 20px gold,
+
+0 0 40px rgba(
+255,
+215,
+0,
+.8
+);
 
 }
 
 #middle h2{
 
-margin-top:10px;
+margin-top:20px;
+
+font-size:24px;
+
+letter-spacing:6px;
 
 color:#f0ddb0;
 
-font-size:22px;
-
 }
+
+/* 中间按钮 */
 
 #menu{
 
-margin-top:40px;
+display:block !important;
+
+margin-top:50px;
+
+z-index:1000;
 
 }
 
 #menu a{
 
-margin:0 25px;
+display:inline-block;
+
+margin:0 35px;
+
+font-size:28px;
 
 cursor:pointer;
 
-font-size:20px;
-
 color:#d4af37;
 
-text-decoration:none;
+transition:.3s;
 
 }
 
@@ -164,79 +219,33 @@ text-decoration:none;
 
 color:#fff2b0;
 
+text-shadow:
+
+0 0 20px gold;
+
+transform:
+
+translateY(-5px);
+
 }
 
-#about,
-#work,
-#contact,
-#projects{
+/* 图标 */
 
-position:fixed;
+.social{
 
-z-index:999;
-
-font-size:22px;
-
-cursor:pointer;
+font-size:32px;
 
 color:#d4af37;
 
 }
 
-#about{
-
-left:20px;
-
-top:50%;
-
-transform:
-translateY(-50%)
-rotate(-90deg);
-
-}
-
-#work{
-
-right:20px;
-
-top:50%;
-
-transform:
-translateY(-50%)
-rotate(90deg);
-
-}
-
-#projects{
-
-top:20px;
-
-left:50%;
-
-transform:
-translateX(-50%);
-
-}
-
-#contact{
-
-bottom:20px;
-
-left:50%;
-
-transform:
-translateX(-50%);
-
-}
-
-#about:hover,
-#work:hover,
-#contact:hover,
-#projects:hover{
+.social:hover{
 
 color:#fff2b0;
 
 }
+
+/* 页面 */
 
 .container{
 
@@ -252,33 +261,38 @@ width:100vw;
 
 height:100vh;
 
-overflow-y:auto;
+overflow:auto;
+
+padding:80px;
 
 background:
 
-rgba(0,0,0,.92);
+rgba(
+0,
+0,
+0,
+.93
+);
 
-padding:70px;
-
-z-index:998;
+z-index:9999;
 
 }
 
 .container h1{
 
-font-size:60px;
+font-size:65px;
 
 color:#f5c542;
 
-margin-bottom:30px;
+margin-bottom:40px;
 
 }
 
 .container h2{
 
-margin-bottom:20px;
-
 color:#fff2b0;
+
+margin-bottom:20px;
 
 }
 
@@ -288,27 +302,39 @@ font-size:18px;
 
 line-height:1.8;
 
-color:#d7c598;
+color:#d8c58a;
 
 }
 
 .project_card{
 
-padding:25px;
-
 margin:30px 0;
 
-background:
-
-rgba(255,255,255,.03);
+padding:25px;
 
 border:
 
-1px solid rgba(212,175,55,.3);
+1px solid rgba(
+212,
+175,
+55,
+.3
+);
+
+background:
+
+rgba(
+255,
+255,
+255,
+.03
+);
 
 }
 
 .project_info h3{
+
+font-size:30px;
 
 color:#f5c542;
 
@@ -318,9 +344,13 @@ margin-bottom:15px;
 
 .btn_one{
 
-padding:12px 28px;
+padding:
 
-background:transparent;
+14px 30px;
+
+background:
+
+transparent;
 
 border:
 
@@ -330,15 +360,21 @@ color:#d4af37;
 
 cursor:pointer;
 
+transition:.3s;
+
 }
 
 .btn_one:hover{
 
-background:#d4af37;
+background:
+
+#d4af37;
 
 color:black;
 
 }
+
+/* skills */
 
 #used div{
 
@@ -354,24 +390,20 @@ border:
 
 }
 
-.social{
-
-font-size:32px;
-
-color:#d4af37;
-
-}
+/* form */
 
 input,
 textarea{
 
 width:80%;
 
-padding:10px;
+padding:12px;
 
 margin:15px;
 
-background:transparent;
+background:
+
+transparent;
 
 border:none;
 
@@ -382,6 +414,19 @@ border-bottom:
 color:white;
 
 }
+
+input:focus,
+textarea:focus{
+
+outline:none;
+
+border-bottom:
+
+2px solid gold;
+
+}
+
+/* footer */
 
 #footer{
 
@@ -399,11 +444,13 @@ color:#d4af37;
 
 color:#f5c542;
 
+text-decoration:none;
+
 }
 
 ::-webkit-scrollbar{
 
-width:6px;
+width:5px;
 
 }
 
@@ -413,6 +460,8 @@ background:#d4af37;
 
 }
 
+/* 手机 */
+
 @media(max-width:800px){
 
 #middle h1{
@@ -421,12 +470,19 @@ font-size:55px;
 
 }
 
-#about,
-#work,
-#contact,
-#projects{
+#menu a{
 
-display:none;
+display:block;
+
+margin:20px;
+
+font-size:22px;
+
+}
+
+.container{
+
+padding:40px;
 
 }
 
