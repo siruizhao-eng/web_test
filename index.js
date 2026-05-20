@@ -280,3 +280,100 @@ hideAll();
 }
 
 );
+
+document.addEventListener("keydown", function(event) {
+
+if(event.key==="Escape"){
+
+if(
+typeof closeabout==="function"
+){
+closeabout();
+}
+
+if(
+typeof closework==="function"
+){
+closework();
+}
+
+if(
+typeof closecontact==="function"
+){
+closecontact();
+}
+
+if(
+typeof closeprojects==="function"
+){
+closeprojects();
+}
+
+}
+
+});
+
+document.addEventListener("click",function(e){
+
+const containers=[
+
+"about_container",
+
+"work_container",
+
+"contact_container",
+
+"projects_container"
+
+];
+
+let inside=false;
+
+containers.forEach(id=>{
+
+let el=document.getElementById(id);
+
+if(
+el&&
+el.style.display==="block"&&
+el.contains(e.target)
+){
+
+inside=true;
+
+}
+
+});
+
+if(
+e.target.closest("#about")||
+e.target.closest("#work")||
+e.target.closest("#contact")||
+e.target.closest("#projects")
+){
+
+inside=true;
+
+}
+
+if(!inside){
+
+try{
+closeabout();
+}catch{}
+
+try{
+closework();
+}catch{}
+
+try{
+closecontact();
+}catch{}
+
+try{
+closeprojects();
+}catch{}
+
+}
+
+});
