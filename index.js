@@ -1,68 +1,282 @@
-function showprojects(){
-    $("#projects_container").css("display","inherit");
-    $("#projects_container").addClass("animated slideInDown");
-    setTimeout(function(){
-        $("#projects_container").removeClass("animated slideInDown");
-    },800);
+var current = "";
+
+window.onload = function () {
+
+setTimeout(function () {
+
+var load = document.getElementById("loading");
+
+if(load){
+load.style.opacity="0";
+
+setTimeout(function () {
+
+load.style.display="none";
+
+},500);
+
 }
-function closeprojects(){
-    $("#projects_container").addClass("animated slideOutUp");
-    setTimeout(function(){
-        $("#projects_container").removeClass("animated slideOutUp");
-        $("#projects_container").css("display","none");
-    },800);
+
+},2000);
+
+};
+
+function hideAll(){
+
+var arr=[
+
+"about_container",
+
+"work_container",
+
+"contact_container",
+
+"contact_container",
+
+"projects_container"
+
+];
+
+for(let i=0;i<arr.length;i++){
+
+var el=document.getElementById(arr[i]);
+
+if(el){
+
+el.style.display="none";
+
 }
+
+}
+
+current="";
+
+}
+
+function openPage(id){
+
+hideAll();
+
+var page=document.getElementById(id);
+
+if(page){
+
+page.style.display="block";
+
+current=id;
+
+}
+
+}
+
 function showabout(){
-    $("#about_container").css("display","inherit");
-    $("#about_container").addClass("animated slideInLeft");
-    setTimeout(function(){
-        $("#about_container").removeClass("animated slideInLeft");
-    },800);
+
+openPage("about_container");
+
 }
-function closeabout(){
-    $("#about_container").addClass("animated slideOutLeft");
-    setTimeout(function(){
-        $("#about_container").removeClass("animated slideOutLeft");
-        $("#about_container").css("display","none");
-    },800);
-}
+
 function showwork(){
-    $("#work_container").css("display","inherit");
-    $("#work_container").addClass("animated slideInRight");
-    setTimeout(function(){
-        $("#work_container").removeClass("animated slideInRight");
-    },800);
+
+openPage("work_container");
+
 }
-function closework(){
-    $("#work_container").addClass("animated slideOutRight");
-    setTimeout(function(){
-        $("#work_container").removeClass("animated slideOutRight");
-        $("#work_container").css("display","none");
-    },800);
-}
+
 function showcontact(){
-    $("#contact_container").css("display","inherit");
-    $("#contact_container").addClass("animated slideInUp");
-    setTimeout(function(){
-        $("#contact_container").removeClass("animated slideInUp");
-    },800);
+
+openPage("contact_container");
+
 }
+
+function showprojects(){
+
+openPage("projects_container");
+
+}
+
+function closeabout(){
+
+var x=document.getElementById("about_container");
+
+if(x){
+
+x.style.display="none";
+
+}
+
+current="";
+
+}
+
+function closework(){
+
+var x=document.getElementById("work_container");
+
+if(x){
+
+x.style.display="none";
+
+}
+
+current="";
+
+}
+
 function closecontact(){
-    $("#contact_container").addClass("animated slideOutDown");
-    setTimeout(function(){
-        $("#contact_container").removeClass("animated slideOutDown");
-        $("#contact_container").css("display","none");
-    },800);
+
+var x=document.getElementById("contact_container");
+
+if(x){
+
+x.style.display="none";
+
 }
-setTimeout(function(){
-    $("#loading").addClass("animated fadeOut");
-    setTimeout(function(){
-      $("#loading").removeClass("animated fadeOut");
-      $("#loading").css("display","none");
-      $("#box").css("display","none");
-      $("#projects").removeClass("animated fadeIn");
-      $("#about").removeClass("animated fadeIn");
-      $("#contact").removeClass("animated fadeIn");
-      $("#work").removeClass("animated fadeIn");
-    },1000);
-},1500);
+
+current="";
+
+}
+
+function closeprojects(){
+
+var x=document.getElementById("projects_container");
+
+if(x){
+
+x.style.display="none";
+
+}
+
+current="";
+
+}
+
+document.addEventListener(
+
+"keydown",
+
+function(e){
+
+if(e.key==="Escape"){
+
+hideAll();
+
+}
+
+}
+
+);
+
+document.addEventListener(
+
+"click",
+
+function(e){
+
+if(!current)return;
+
+var container=
+
+document.getElementById(current);
+
+if(
+
+container&&
+
+container.style.display==="block"
+
+){
+
+if(
+
+!container.contains(e.target)
+
+&&
+
+!e.target.closest(
+
+"#about"
+
+)
+
+&&
+
+!e.target.closest(
+
+"#work"
+
+)
+
+&&
+
+!e.target.closest(
+
+"#contact"
+
+)
+
+&&
+
+!e.target.closest(
+
+"#projects"
+
+)
+
+&&
+
+!e.target.closest(
+
+"#menu"
+
+)
+
+){
+
+hideAll();
+
+}
+
+}
+
+}
+
+);
+
+window.addEventListener(
+
+"popstate",
+
+function(){
+
+hideAll();
+
+}
+
+);
+
+document.addEventListener(
+
+"touchstart",
+
+function(e){
+
+if(!current)return;
+
+var container=
+
+document.getElementById(current);
+
+if(
+
+container&&
+
+!container.contains(e.target)
+
+){
+
+hideAll();
+
+}
+
+}
+
+);
